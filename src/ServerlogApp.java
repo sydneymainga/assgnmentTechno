@@ -1,21 +1,32 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.URL;
 import java.util.Scanner;
 
 public class ServerlogApp {
-    public static void main(String[] args) throws FileNotFoundException {
-        //parsing a CSV file into the constructor of Scanner class
-        Scanner sc = new Scanner(
-                new File("C:\\Users\\Alif Computer\\IdeaProjects\\untitled\\resource"));
-        //setting comma as delimiter pattern
-        sc.useDelimiter(",");
+    public static void main(String[] args)  {
+        String line = "";
+        String splitBy = ",";
+        try {
 
-        while (sc.hasNext()) {
-            System.out.print(sc.next());
+
+
+            //parsing a CSV file into BufferedReader class constructor
+            BufferedReader br = new BufferedReader(new FileReader("./resource/technobrain.csv"));
+
+            while ((line = br.readLine()) != null)
+            //returns a Boolean value
+            {
+                String[] logs = line.split(splitBy);
+                //use comma as separator
+                //System.out.println("logs[timestamp=" + logs[1] + ", url=" + logs[2] + ", IPAddress=" + logs[3] + "]");
+                System.out.println("--->"+logs[0]);
+            }
         }
-        //closes the scanner
-        sc.close();
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     }
-    }
+
 
